@@ -1,0 +1,46 @@
+{
+  "name": "codemade-xyz/wui-bundle",
+  "type": "symfony-bundle",
+  "description": "WUI bundle for Symfony",
+  "keywords": ["wui", "database", "template"],
+  "homepage": "https://github.com/codemade-xyz/wui-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andrew Koen",
+      "email": "koen@codemade.xyz"
+    }
+  ],
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true,
+    "process-timeout": 0
+  },
+  "require": {
+    "php": ">= 7.1",
+    "ext-json": "^1.5",
+    "ext-pdo": "*",
+    "symfony/config": "^4.3",
+    "symfony/http-foundation": "^4.3",
+    "symfony/http-kernel": "^4.3",
+    "symfony/property-access": "^4.3",
+    "symfony/templating": "^4.3"
+
+  },
+  "require-dev": {
+    "symfony/console": "^4.3",
+    "symfony/dependency-injection": "^4.3",
+    "symfony/phpunit-bridge": "^4.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodeMade\\WuiBundle\\": ""
+    }
+  },
+  "suggest": {
+    "ext-pdo_mysql": "For MySQL or MariaDB database",
+    "ext-pdo_pqsql": "For PostgreSQL database"
+  }
+}

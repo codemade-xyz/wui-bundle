@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php" verbose="true" colors="true">
+	<php>
+		<ini name="error_reporting" value="-1" />
+	</php>
+
+	<testsuites>
+		<testsuite name="WuiBundle Test Suite">
+			<directory>./Tests/</directory>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<whitelist>
+			<directory>./</directory>
+			<exclude>
+				<directory>./Resources</directory>
+				<directory>./Tests</directory>
+				<directory>./vendor</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>
