@@ -70,6 +70,7 @@ class QueryBuilder
     public function createQueryBuilder($repositoryTableMaps = null)
     {
 
+        $this->parameters = [];
         $this->single = false;
         $this->query = null;
         $this->firstResult = 0;
