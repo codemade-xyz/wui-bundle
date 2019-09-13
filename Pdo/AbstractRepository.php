@@ -66,9 +66,11 @@ class AbstractRepository
             ->getOneOrReturnFalse();
     }
 
-    public function update($id, $data = [], $condition = [])
+    public function update($data = [], $condition = [])
     {
-        $condition[$this->tableMap['id']] = $id;
+        if (empty($condition)) {
+            return false;
+        }
         return $this->createQueryBuilder()
             ->update($this->tableName)
             ->set($data)
@@ -76,9 +78,11 @@ class AbstractRepository
             ->exec();
     }
 
-    public function delete($id, $condition = [])
+    public function delete($condition = [])
     {
-        $condition[$this->tableMap['id']] = $id;
+        if (empty($condition)) {
+            return false;
+        }
         return $this->createQueryBuilder()
             ->delete($this->tableName)
             ->where($condition)
