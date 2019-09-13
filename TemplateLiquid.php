@@ -90,6 +90,7 @@ class TemplateLiquid
             );
             $response->send();
             $this->kernel->shutdown();
+            exit();
         }
 
         return $content;
