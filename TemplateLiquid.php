@@ -89,6 +89,7 @@ class TemplateLiquid
                 ['content-type' => 'text/html']
             );
             $response->send();
+            $this->kernel->shutdown();
         }
 
         return $content;
