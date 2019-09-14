@@ -86,7 +86,7 @@ class QueryBuilder
             'from'    => [],
             'join'    => [],
             'set'     => [],
-            'where'   => null,
+            'where'   => [],
             'groupBy' => [],
             'having'  => null,
             'orderBy' => []
