@@ -182,6 +182,7 @@ class Template
 	public function render(array $assigns = array(), $filters = null, array $registers = array()) {
 		$context = new Context($assigns, $registers);
 
+		Liquid::setParameter($assigns);
 
 		$locale = new Locale($this->path);
 

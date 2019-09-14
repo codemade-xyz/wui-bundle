@@ -102,6 +102,9 @@ class Liquid
     // template Name
     protected static $view;
 
+    // parameter from controller
+    protected static $parameter;
+
     /**
      * @var PropertyAccessor
      */
@@ -233,6 +236,17 @@ class Liquid
     public static function setLocaleArray(array $locale_array)
     {
         return self::$locale_array = $locale_array;
+    }
+
+
+    public static function getParameter()
+    {
+        return self::$parameter;
+    }
+
+    public static function setParameter($parameter)
+    {
+        return self::$parameter = $parameter;
     }
 
     public static function getError()
