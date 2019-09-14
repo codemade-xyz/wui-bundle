@@ -415,17 +415,26 @@ class QueryBuilder
             return $this;
         }
 
-        if (!empty($this->repositoryTableMaps[$join]['join'])) {
+        if (!empty($this->repositoryTableMaps[$join]['join']) && !empty($this->repositoryTableMaps[$join]['join']['columnName']) && !empty($this->repositoryTableMaps[$join]['join']['referencedColumnName'])) {
 
             $condition = '';
-            if ($this->fromAlias != '') {
-                $condition = '`'.$this->fromAlias.'`.';
+
+            if ($this->repositoryTableMaps[$join]['join']['columnName'] != $this->repositoryTableMaps[$join]['join']['referencedColumnName']) {
+
+                if ($this->fromAlias != '') {
+                    $condition = '`'.$this->fromAlias.'`.';
+                }
+
+
+                $condition .= '`'.$this->repositoryTableMaps[$join]['join']['columnName'].'` = `'.$alias.'`.`'.$this->repositoryTableMaps[$join]['join']['referencedColumnName'].'`';
+                $conditionType = 'ON';
+            } else {
+                $condition = '(`'.$this->repositoryTableMaps[$join]['join']['columnName'].'`)';
+                $conditionType = 'USING';
             }
 
-            $condition .= '`'.$this->repositoryTableMaps[$join]['join']['columnName'].'` = `'.$alias.'`.`'.$this->repositoryTableMaps[$join]['join']['referencedColumnName'].'`';
-
             $join = $this->repositoryTableMaps[$join]['join']['table'];
-            $conditionType = 'ON';
+
 
         }
 
