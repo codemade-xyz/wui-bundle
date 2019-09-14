@@ -5,7 +5,7 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="templating.engine.liquid" class="CodeMade\WuiBundle\TemplateLiquid">
+        <service id="CodeMade\WuiBundle\TemplateLiquid" class="CodeMade\WuiBundle\TemplateLiquid">
             <argument type="service" id="kernel" />
             <argument>settings</argument>
         </service>
@@ -14,10 +14,6 @@
             <argument type="service" id="kernel" />
             <argument>settings</argument>
         </service>
-
-
-        <!--<service id="CodeMade\WuiBundle\Database" public="true" alias="wui.database" />-->
-
 
     </services>
 </container>

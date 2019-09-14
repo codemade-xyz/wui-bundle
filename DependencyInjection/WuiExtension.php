@@ -24,7 +24,7 @@ class WuiExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('templating.engine.liquid');
+        $definition = $container->getDefinition('CodeMade\WuiBundle\TemplateLiquid');
         $definition->setPublic(true);
         $definition->setAutoconfigured(true);
         $definition->setAutowired(true);
