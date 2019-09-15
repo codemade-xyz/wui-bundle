@@ -5,12 +5,12 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="CodeMade\WuiBundle\TemplateLiquid" class="CodeMade\WuiBundle\TemplateLiquid">
+        <service id="liquid" class="CodeMade\WuiBundle\TemplateLiquid">
             <argument type="service" id="kernel" />
             <argument>settings</argument>
         </service>
 
-        <service id="CodeMade\WuiBundle\Database" class="CodeMade\WuiBundle\Database">
+        <service id="database" class="CodeMade\WuiBundle\Database">
             <argument type="service" id="kernel" />
             <argument>settings</argument>
         </service>

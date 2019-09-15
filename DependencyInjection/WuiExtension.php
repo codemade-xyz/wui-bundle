@@ -24,13 +24,13 @@ class WuiExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('CodeMade\WuiBundle\TemplateLiquid');
+        $definition = $container->getDefinition('liquid');
         $definition->setPublic(true);
         $definition->setAutoconfigured(true);
         $definition->setAutowired(true);
         $definition->replaceArgument(1, $config['liquid']);
 
-        $definition = $container->getDefinition('CodeMade\WuiBundle\Database');
+        $definition = $container->getDefinition('database');
         $definition->setPublic(true);
         $definition->setAutoconfigured(true);
         $definition->setAutowired(true);
