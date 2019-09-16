@@ -63,8 +63,8 @@ class LocalFileSystem implements FileSystem
      */
 	public function fullPath($templatePath) {
         $nameRegex = Liquid::get('INCLUDE_ALLOW_EXT')
-			? new Regexp('/^[^.\/][a-zA-Z0-9_\.\/]+$/')
-			: new Regexp('/^[^.\/][a-zA-Z0-9_\/]+$/');
+			? new Regexp('/^[^.\/][a-zA-Z0-9_-\.\/]+$/')
+			: new Regexp('/^[^.\/][a-zA-Z0-9_-\/]+$/');
 
 		if (!$nameRegex->match($templatePath)) {
 			throw new LiquidException("Illegal template name '$templatePath'");
