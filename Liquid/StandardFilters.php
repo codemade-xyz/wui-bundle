@@ -63,14 +63,14 @@ class StandardFilters
 	 * @return string
 	 */
 	public static function date($input, $format) {
-		if (!is_numeric($input)) {
-			$input = strtotime($input);
-		}
-
         if ($input == 'now') {
             $input = time();
             return date($format, $input);
         }
+
+		if (!is_numeric($input)) {
+			$input = strtotime($input);
+		}
 
 		if ($format == 'r')
 			return date($format, $input);
