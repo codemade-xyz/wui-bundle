@@ -35,29 +35,35 @@ class AbstractRepository
 
     public function find($id)
     {
-        return $this->db->select($this->tableMap,'*',[$this->tableMap['id'] => $id]);
+        return $this->createQueryBuilder()
+            ->where($this->tableMap['id'].' = :id')
+            ->setParameter('id', $id)
+            ->exec();
     }
 
     public function findOne($id)
     {
-        return $this->db->get($this->tableMap,'*', [$this->tableMap['id'] => $id]);
+        return $this->createQueryBuilder()
+            ->where($this->tableMap['id'].' = :id')
+            ->setParameter('id', $id)
+            ->getOneOrReturnFalse();
     }
 
     public function findBy($condition = [], $order = [])
     {
-        if (!empty($order)) {
-            $condition['ORDER'] = $order;
-        }
-        return $this->db->select($this->tableMap, '*', $condition);
+        return $this->createQueryBuilder()
+            ->where($condition)
+            ->orderBy($order)
+            ->exec();
 
     }
 
     public function findOneBy($condition = [], $order = [])
     {
-        if (!empty($order)) {
-            $condition['ORDER'] = $order;
-        }
-        return $this->db->get($this->tableMap, '*', $condition);
+        return $this->createQueryBuilder()
+            ->where($condition)
+            ->orderBy($order)
+            ->getOneOrReturnFalse();
     }
 
     public function update($data = [], $condition = [])
@@ -65,7 +71,11 @@ class AbstractRepository
         if (empty($condition)) {
             return false;
         }
-        return $this->db->update($this->tableMap, $data,$condition);
+        return $this->createQueryBuilder()
+            ->update($this->tableName)
+            ->set($data)
+            ->where($condition)
+            ->exec();
     }
 
     public function delete($condition = [])
@@ -73,17 +83,18 @@ class AbstractRepository
         if (empty($condition)) {
             return false;
         }
-        return $this->db->delete($this->tableMap, $condition);
+        return $this->createQueryBuilder()
+            ->delete($this->tableName)
+            ->where($condition)
+            ->exec();
     }
 
     public function insert($data = [])
     {
-        return $this->db->delete($this->tableMap, $data);
-    }
-
-    public function count($condition = [])
-    {
-        return $this->db->count($this->tableMap, $condition);
+        return $this->createQueryBuilder()
+            ->insert($this->tableName)
+            ->set($data)
+            ->exec();
     }
 
 

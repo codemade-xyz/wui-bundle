@@ -11,7 +11,7 @@ class PdoQuery
 {
 
     /**
-     * @var PDO
+     * @var Connection
      */
     public $connection = null;
 
@@ -28,6 +28,133 @@ class PdoQuery
         $this->debug = !$database->debug ? false : true;
     }
 
+    public function get($table, $join = null, $columns = null, $where = null)
+    {
+        $start = microtime(true);
+        $result = $this->connection->get($table, $join, $columns, $where);
+
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+    }
+
+    public function selectAsObject($table, $join = null, $columns = null, $where = null)
+    {
+        $start = microtime(true);
+
+        $result = (object)$this->connection->get($table, $join, $columns, $where);
+
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
+    public function select($table, $join = null, $columns = null, $where = null)
+    {
+        $start = microtime(true);
+
+        $result = $this->connection->select($table, $join, $columns, $where);
+
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
+    public function count($table, $join = null, $columns = null, $where = null)
+    {
+        $start = microtime(true);
+        $result = $this->connection->count($table, $join, $columns, $where);
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
+    public function insert($table, $data)
+    {
+        $start = microtime(true);
+
+        $this->connection->insert($table, $data);
+        $result = $this->connection->id();
+
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
+    public function update($table, $data, $where = null)
+    {
+        $start = microtime(true);
+
+        $result = $this->connection->update($table, $data, $where);
+
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
+    public function delete($table, $where = null)
+    {
+        $start = microtime(true);
+
+        if ($where != null && is_array($where)) {
+            $result = $this->connection->delete($table, $where);
+            if ($this->debug)
+            {
+                $this->addLog($start);
+            }
+
+            return $result;
+        } else {
+            return false;
+        }
+
+    }
+
+    protected function addLog($start)
+    {
+
+
+            $add_error = '';
+            if (is_array($this->connection->error()) && !empty($this->connection->error()[2]) && gettype($this->connection->error()[2]) === 'string') {
+                $add_error = $this->connection->error()[2];
+                Logger::addError($add_error);
+            }
+
+            $finish = $this->getExecTime($start);
+            Logger::addTimeAll($finish);
+            Logger::addLog([
+                'time' => $finish,
+                'query' => $this->connection->last(),
+                'error' => $add_error,
+                'connection' => $this->connection_name
+            ]);
+
+
+
+    }
 
     public function query($type, $query, $map = [], $fetch = true)
     {
@@ -144,10 +271,7 @@ class PdoQuery
         elseif ($type === 'NULL')
         {
             $value = null;
-        }/* elseif ($type === 'string')
-        {
-            $value = $this->connection->pdo->quote($value);
-        }*/
+        }
         return [$value, $map[ $type ]];
     }
 
