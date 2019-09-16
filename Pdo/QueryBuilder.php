@@ -274,6 +274,10 @@ class QueryBuilder
 
         $this->sqlParts['where'] = [];
         if (is_array($where)) {
+            if (isset($where['OR'])) {
+                $this->orWhere($where['OR']);
+                unset($where['OR']);
+            }
                return $this->_whereArray($where);
         }
             $where = $this->getParametersFromWhere($where);
@@ -291,6 +295,12 @@ class QueryBuilder
         }
 
         if (is_array($where)) {
+
+            if (isset($where['OR'])) {
+                $this->orWhere($where['OR']);
+                unset($where['OR']);
+            }
+
             return $this->_whereArray($where);
         }
 
@@ -308,7 +318,7 @@ class QueryBuilder
         }
 
         if (is_array($where)) {
-            return $this->_whereArray($where);
+            return $this->_whereArray($where, true);
         }
 
         $where = $this->getParametersFromWhere($where);
@@ -318,14 +328,23 @@ class QueryBuilder
         return $this;
     }
 
-    protected function _whereArray($where)
+    protected function _whereArray($where, $or = false)
     {
+        $whereSql = [];
         foreach ($where as $inKey => $inValue) {
             $this->setCount++;
             $name = '_v'.$this->setCount;
             $inKey = '`'.str_replace('.', '`.`', $inKey).'`';
-            $this->sqlParts['where'][] = $inKey.' = :'.$name;
+            if (!$or) {
+                $this->sqlParts['where'][] = $inKey . ' = :' . $name;
+            } else {
+                $whereSql[] = $inKey . ' = :' . $name;
+            }
             $this->parameters[$name] = $inValue;
+        }
+
+        if (!empty($whereSql)) {
+            $this->sqlParts['where'][] = '('.implode(' OR ', $whereSql).')';
         }
 
         return $this;
