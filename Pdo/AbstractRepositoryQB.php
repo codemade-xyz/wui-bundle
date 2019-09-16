@@ -3,7 +3,7 @@ namespace CodeMade\WuiBundle\Pdo;
 
 use CodeMade\WuiBundle\Database;
 
-class AbstractRepository
+class AbstractRepositoryQB
 {
     protected $tableName = null;
     protected $tableMap = [
