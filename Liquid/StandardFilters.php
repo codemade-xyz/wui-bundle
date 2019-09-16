@@ -69,6 +69,7 @@ class StandardFilters
 
         if ($input == 'now') {
             $input = time();
+            return date($format, $input);
         }
 
 		if ($format == 'r')
