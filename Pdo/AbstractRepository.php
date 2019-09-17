@@ -22,12 +22,17 @@ class AbstractRepository
     protected $db = null;
 
     /**
+     * @var Database
+     */
+    protected $database;
+    /**
      * PdoAbstractRepository constructor.
      * @param Database $database
      */
     public function __construct(Database $database)
     {
         $connection_name = isset($this->tableMap['connection']) ? $this->tableMap['connection'] : null;
+        $this->database = $database;
         $this->db = new PdoQuery($database, $connection_name);
         $this->tableName = $this->getTable();
         $this->qb = new QueryBuilder($this->db);
