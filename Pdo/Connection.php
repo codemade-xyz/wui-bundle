@@ -1183,7 +1183,7 @@ class Connection
             return $query->fetchAll(PDO::FETCH_COLUMN);
         }
 
-        while ($data = $query->fetch(PDO::FETCH_KEY_PAIR))
+        while ($data = $query->fetch(PDO::FETCH_ASSOC))
         {
             $current_stack = [];
 
