@@ -83,7 +83,7 @@ class AbstractRepository
 
     public function insert($data = [])
     {
-        return $this->db->delete($this->tableName, $data);
+        return $this->db->insert($this->tableName, $data);
     }
 
     public function count($condition = [])
