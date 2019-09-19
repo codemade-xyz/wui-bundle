@@ -656,6 +656,9 @@ class StandardFilters
      */
 	public static function t($input) {
         $keys = self::_t_getKey($input);
+        if (empty(Liquid::getLocaleArray())) {
+            return '';
+        }
         return Liquid::$propertyAccessor->getValue(Liquid::getLocaleArray(), $keys);
     }
     protected static function _t_getKey($input) {
