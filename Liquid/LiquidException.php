@@ -20,11 +20,7 @@ class LiquidException
     public function __construct($message = "", $code = 0, $previous = null)
     {
         Liquid::addError($message);
-        $code = 0;
 
-        /*if (Liquid::$project_env) {
-            throw new LiquidExceptionInfo($message, $code, $previous);
-        }*/
 
     }
 

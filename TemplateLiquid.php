@@ -30,6 +30,11 @@ class TemplateLiquid
 
     }
 
+    public function addPath($name, $path)
+    {
+        $this->paths[$name] = $path;
+    }
+
 
     /**
      * @param string $view
