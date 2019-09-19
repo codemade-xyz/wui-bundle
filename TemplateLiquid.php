@@ -106,6 +106,78 @@ class TemplateLiquid
 
     }
 
+
+    /**
+     * @param string $html
+     * @param string $view
+     * @param array $parameters
+     * @return string
+     * @throws \CodeMade\WuiBundle\Liquid\LiquidException
+     */
+    public function renderContent($html, string $view, array $parameters)
+    {
+        if ($this->kernel->isDebug())
+        {
+            $panel = new Panel($this->kernel);
+        }
+
+        list($template_file, $template_path, $template_name, $view) = $this->getTemplateFile($view);
+
+        Liquid::set('INCLUDE_SUFFIX', $this->settings['include_suffix']);
+        Liquid::set('INCLUDE_PREFIX', $this->settings['include_prefix']);
+        Liquid::setTemplate($template_name);
+        Liquid::setView($view);
+        Liquid::$project_dir = $this->kernel->getProjectDir();
+        Liquid::$project_env = $this->kernel->getEnvironment();
+
+        $request = $this->kernel->getContainer()->get('request_stack')->getCurrentRequest();
+
+
+        $this->setSettingFromRequest($request);
+
+        $cache = $this->getCacheSetting();
+
+        $liquid = new Template($template_path.'/', $cache);
+
+
+        if (!empty($this->settings['tags'])) {
+            foreach ($this->settings['tags'] as $key => $item) {
+                $liquid->registerTag($key, $item);
+            }
+        }
+
+        if (!empty($this->settings['filter'])) {
+            $liquid->registerFilter(new $this->settings['filter']);
+        }
+
+
+        $liquid->parse($html);
+        $content = $liquid->render($parameters);
+
+        if ($this->kernel->isDebug() && !empty($panel))
+        {
+
+            if (is_array(Liquid::getError())) {
+                throw new \LogicException('Liquid: '.Liquid::getError()[0]);
+            }
+            $content = $panel->render($liquid, $this->start_time, $content, $parameters);
+        }
+
+        if(isset($parameters['_error']) && $parameters['_error'] == '404') {
+            $response = new \Symfony\Component\HttpFoundation\Response(
+                $content,
+                \Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND,
+                ['content-type' => 'text/html']
+            );
+            $response->send();
+            $this->kernel->shutdown();
+            exit();
+        }
+
+        return $content;
+
+    }
+
     public function setSettingFromRequest(Request $request)
     {
         Liquid::setLocale($request->getLocale());
