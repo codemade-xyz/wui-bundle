@@ -19,7 +19,7 @@ class LiquidException
 
     public function __construct($message = "", $code = 0, $previous = null)
     {
-        Liquid::$config['error'][] = $message;
+        Liquid::addError($message);
         $code = 0;
 
         /*if (Liquid::$project_env) {
