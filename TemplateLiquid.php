@@ -79,6 +79,10 @@ class TemplateLiquid
 
         if ($this->kernel->isDebug() && !empty($panel))
         {
+
+            if (is_array(Liquid::getError())) {
+                throw new \LogicException('Liquid: '.Liquid::getError()[0]);
+            }
             $content = $panel->render($liquid, $this->start_time, $content, $parameters);
         }
 
