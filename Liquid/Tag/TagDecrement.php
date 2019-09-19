@@ -51,7 +51,7 @@ class TagDecrement extends AbstractTag
 		if ($syntax->match($markup)) {
 			$this->toDecrement = $syntax->matches[0];
 		} else {
-			throw new LiquidException("Syntax Error in 'decrement' - Valid syntax: decrement [var]");
+			new LiquidException("Syntax Error in 'decrement' - Valid syntax: decrement [var]");
 		}
 	}
 

@@ -48,7 +48,7 @@ class TagBlock extends AbstractBlock
 			$this->block = $syntaxRegexp->matches[1];
 			parent::__construct($markup, $tokens, $fileSystem);
 		} else {
-			throw new LiquidException("Syntax Error in 'block' - Valid syntax: block [name]");
+			new LiquidException("Syntax Error in 'block' - Valid syntax: block [name]");
 		}
 	}
 }

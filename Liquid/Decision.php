@@ -44,7 +44,7 @@ class Decision extends AbstractBlock
 			if (method_exists($value, '__toString')) {
 				$value = (string) $value;
 			} else {
-				throw new LiquidException("Cannot convert $value to string"); // harry
+				new LiquidException("Cannot convert $value to string"); // harry
 			}
 		}
 
@@ -146,7 +146,7 @@ class Decision extends AbstractBlock
 				return is_array($left) ? in_array($right, $left) : (strpos($left, $right) !== false);
 
 			default:
-				throw new LiquidException("Error in tag '" . $this->name() . "' - Unknown operator $op");
+				new LiquidException("Error in tag '" . $this->name() . "' - Unknown operator $op");
 		}
 	}
 }

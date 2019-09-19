@@ -75,7 +75,7 @@ class TagCase extends Decision
 		if ($syntaxRegexp->match($markup)) {
 			$this->left = $syntaxRegexp->matches[0];
 		} else {
-			throw new LiquidException("Syntax Error in tag 'case' - Valid syntax: case [condition]"); // harry
+			new LiquidException("Syntax Error in tag 'case' - Valid syntax: case [condition]"); // harry
 		}
 	}
 
@@ -107,7 +107,7 @@ class TagCase extends Decision
 					$this->nodelist = array();
 
 				} else {
-					throw new LiquidException("Syntax Error in tag 'case' - Valid when condition: when [condition]"); // harry
+					new LiquidException("Syntax Error in tag 'case' - Valid when condition: when [condition]"); // harry
 				}
 				break;
 

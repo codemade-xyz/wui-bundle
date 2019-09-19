@@ -104,7 +104,7 @@ class TagFor extends AbstractBlock
 				$this->name = $syntaxRegexp->matches[1].'-digit';
 				$this->extractAttributes($markup);
 			} else {
-				throw new LiquidException("Syntax Error in 'for loop' - Valid syntax: for [item] in [collection]");
+				new LiquidException("Syntax Error in 'for loop' - Valid syntax: for [item] in [collection]");
 			}
 		}
 	}

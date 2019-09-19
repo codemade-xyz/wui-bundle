@@ -11,21 +11,21 @@
 
 namespace CodeMade\WuiBundle\Liquid;
 
-use Throwable;
-
 /**
  * LiquidException class.
  */
-class LiquidException extends \Exception
+class LiquidException
 {
 
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = "", $code = 0, $previous = null)
     {
-        if ($code == 7) {
-            Liquid::$config['error'][] = $message;
-            return true;
-        }
-        parent::__construct($message, $code, $previous);
+        Liquid::$config['error'][] = $message;
+        $code = 0;
+
+        /*if (Liquid::$project_env) {
+            throw new LiquidExceptionInfo($message, $code, $previous);
+        }*/
+
     }
 
 }

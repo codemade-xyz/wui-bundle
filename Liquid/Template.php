@@ -85,7 +85,7 @@ class Template
 				$classname = '\CodeMade\WuiBundle\Liquid\Cache\\' . ucwords($cache['cache']);
 				self::$cache = new $classname($cache);
 			} else {
-				throw new LiquidException('Invalid cache options!');
+				new LiquidException('Invalid cache options!');
 			}
 		} else if ($cache instanceof Cache) {
 			self::$cache = $cache;

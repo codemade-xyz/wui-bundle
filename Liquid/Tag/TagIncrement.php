@@ -51,7 +51,7 @@ class TagIncrement extends AbstractTag
 		if ($syntax->match($markup)) {
 			$this->toIncrement = $syntax->matches[0];
 		} else {
-			throw new LiquidException("Syntax Error in 'increment' - Valid syntax: increment [var]");
+			new LiquidException("Syntax Error in 'increment' - Valid syntax: increment [var]");
 		}
 	}
 

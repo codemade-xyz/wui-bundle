@@ -79,7 +79,7 @@ class Liquid
     // locale from request
     public static $project_dir;
     // locale from request
-    public static $project_env;
+    public static $project_env = false;
 
     // locale from request
     protected static $locale;

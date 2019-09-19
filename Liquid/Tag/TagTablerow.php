@@ -64,7 +64,7 @@ class TagTablerow extends AbstractBlock
 
 			$this->extractAttributes($markup);
 		} else {
-			throw new LiquidException("Syntax Error in 'table_row loop' - Valid syntax: table_row [item] in [collection] cols=3");
+			new LiquidException("Syntax Error in 'table_row loop' - Valid syntax: table_row [item] in [collection] cols=3");
 		}
 	}
 

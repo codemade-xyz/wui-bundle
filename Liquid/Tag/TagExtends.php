@@ -59,7 +59,7 @@ class TagExtends extends AbstractTag
 		if ($regex->match($markup)) {
 			$this->templateName = substr($regex->matches[1], 1, strlen($regex->matches[1]) - 2);
 		} else {
-			throw new LiquidException("Error in tag 'extends' - Valid syntax: extends '[template name]'");
+			new LiquidException("Error in tag 'extends' - Valid syntax: extends '[template name]'");
 		}
 
 		parent::__construct($markup, $tokens, $fileSystem);
@@ -102,7 +102,7 @@ class TagExtends extends AbstractTag
 	 */
 	public function parse(array &$tokens) {
 		if ($this->fileSystem === null) {
-			throw new LiquidException("No file system");
+			new LiquidException("No file system");
 		}
 
 		// read the source of the template and create a new sub document

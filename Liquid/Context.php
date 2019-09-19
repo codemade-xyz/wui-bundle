@@ -106,7 +106,7 @@ class Context
 	 */
 	public function pop() {
 		if (count($this->assigns) == 1) {
-			throw new LiquidException('No elements to pop');
+			new LiquidException('No elements to pop');
 		}
 
 		array_shift($this->assigns);
@@ -164,7 +164,7 @@ class Context
 	private function resolve($key) {
 		// This shouldn't happen
 		if (is_array($key)) {
-			throw new LiquidException("Cannot resolve arrays as key");
+			new LiquidException("Cannot resolve arrays as key");
 		}
 
 		if (is_null($key) || $key == 'null') {
@@ -342,7 +342,7 @@ class Context
 		// if everything else fails, throw up
 		if (is_object($object) && !($object instanceof \Traversable)) {
 			$class = get_class($object);
-			throw new LiquidException("Value of type $class has no `toLiquid` nor `__toString` methods");
+			new LiquidException("Value of type $class has no `toLiquid` nor `__toString` methods");
 		}
 
 		return $object;

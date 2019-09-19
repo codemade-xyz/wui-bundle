@@ -49,7 +49,7 @@ class TagCapture extends AbstractBlock
 			$this->to = $syntaxRegexp->matches[1];
 			parent::__construct($markup, $tokens, $fileSystem);
 		} else {
-			throw new LiquidException("Syntax Error in 'capture' - Valid syntax: capture [var] [value]");
+			new LiquidException("Syntax Error in 'capture' - Valid syntax: capture [var] [value]");
 		}
 	}
 

@@ -70,7 +70,7 @@ class Filterbank
 
 		// If it wasn't an object an isn't a string either, it's a bad parameter
 		if (!is_string($filter)) {
-			throw new LiquidException("Parameter passed to addFilter must be an object or a string");
+			new LiquidException("Parameter passed to addFilter must be an object or a string");
 		}
 
 		// If the filter is a class, register all its methods
@@ -89,7 +89,7 @@ class Filterbank
 			return true;
 		}
 
-		throw new LiquidException("Parameter passed to addFilter must a class or a function");
+		new LiquidException("Parameter passed to addFilter must a class or a function");
 	}
 
 	/**

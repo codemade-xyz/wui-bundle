@@ -78,7 +78,7 @@ class AbstractBlock extends AbstractTag
 						$this->unknownTag($tagRegexp->matches[1], $tagRegexp->matches[2], $tokens);
 					}
 				} else {
-					throw new LiquidException("Tag $token was not properly terminated", 7); // harry
+					new LiquidException("Tag $token was not properly terminated", 7); // harry
 				}
 
 			} elseif ($variableStartRegexp->match($token)) {
@@ -148,11 +148,11 @@ class AbstractBlock extends AbstractTag
 	protected function unknownTag($tag, $params, array $tokens) {
 		switch ($tag) {
 			case 'else':
-				throw new LiquidException($this->blockName() . " does not expect else tag", 7);
+				new LiquidException($this->blockName() . " does not expect else tag", 7);
 			case 'end':
-				throw new LiquidException("'end' is not a valid delimiter for " . $this->blockName() . " tags. Use " . $this->blockDelimiter(), 7);
+				new LiquidException("'end' is not a valid delimiter for " . $this->blockName() . " tags. Use " . $this->blockDelimiter(), 7);
 			default:
-				throw new LiquidException("Unknown tag $tag", 7);
+				new LiquidException("Unknown tag $tag", 7);
 		}
 	}
 
@@ -164,7 +164,7 @@ class AbstractBlock extends AbstractTag
      * @throws \ReflectionException
      */
 	protected function assertMissingDelimitation() {
-		throw new LiquidException($this->blockName() . " tag was never closed", 7);
+		new LiquidException($this->blockName() . " tag was never closed", 7);
 	}
 
     /**
@@ -202,6 +202,6 @@ class AbstractBlock extends AbstractTag
 			return new Variable($variableRegexp->matches[1]);
 		}
 
-		throw new LiquidException("Variable $token was not properly terminated", 7);
+		new LiquidException("Variable $token was not properly terminated", 7);
 	}
 }

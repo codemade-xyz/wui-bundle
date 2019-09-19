@@ -91,7 +91,7 @@ class TagPaginate extends AbstractBlock
             $this->numberItems = $syntax->matches[2];
             $this->extractAttributes($markup);
         } else {
-            throw new LiquidException("Syntax Error - Valid syntax: paginate [collection] by [items]");
+            new LiquidException("Syntax Error - Valid syntax: paginate [collection] by [items]");
         }
 
     }

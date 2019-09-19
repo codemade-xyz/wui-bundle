@@ -46,7 +46,7 @@ class LocalFileSystem implements FileSystem
      */
 	public function readTemplateFile($templatePath) {
 		if (!($fullPath = $this->fullPath($templatePath))) {
-			throw new LiquidException("No such template '$templatePath'");
+			new LiquidException("No such template '$templatePath'");
 		}
 
 		return file_get_contents($fullPath);
@@ -67,7 +67,7 @@ class LocalFileSystem implements FileSystem
 			: new Regexp('/^[^.\/][a-zA-Z0-9-_\/]+$/');
 
 		if (!$nameRegex->match($templatePath)) {
-			throw new LiquidException("Illegal template name '$templatePath'");
+			new LiquidException("Illegal template name '$templatePath'");
 		}
 
 
@@ -85,7 +85,7 @@ class LocalFileSystem implements FileSystem
 		$rootRegex = new Regexp('/' . preg_quote(realpath($this->root), '/') . '/');
 
 		if (!$rootRegex->match(realpath($fullPath))) {
-			throw new LiquidException("Illegal template '" . basename($fullPath) . "'");
+			new LiquidException("Illegal template '" . basename($fullPath) . "'");
 		}
 
 		return $fullPath;

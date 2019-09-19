@@ -87,7 +87,7 @@ class TagInclude extends AbstractTag
 
 			$this->extractAttributes($markup);
 		} else {
-			throw new LiquidException("Error in tag 'include' - Valid syntax: include '[template]' (with|for) [object|collection]");
+			new LiquidException("Error in tag 'include' - Valid syntax: include '[template]' (with|for) [object|collection]");
 		}
 
 		parent::__construct($markup, $tokens, $fileSystem);
@@ -102,7 +102,7 @@ class TagInclude extends AbstractTag
 	 */
 	public function parse(array &$tokens) {
 		if ($this->fileSystem === null) {
-			throw new LiquidException("No file system");
+			new LiquidException("No file system");
 		}
 
 		// read the source of the template and create a new sub document

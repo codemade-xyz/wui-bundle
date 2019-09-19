@@ -66,7 +66,7 @@ class TagCycle extends AbstractTag
 			$this->variables = $this->variablesFromString($markup);
 			$this->name = "'" . implode($this->variables) . "'";
 		} else {
-			throw new LiquidException("Syntax Error in 'cycle' - Valid syntax: cycle [name :] var [, var2, var3 ...]");
+			new LiquidException("Syntax Error in 'cycle' - Valid syntax: cycle [name :] var [, var2, var3 ...]");
 		}
 	}
 

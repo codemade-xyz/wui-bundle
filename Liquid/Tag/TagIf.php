@@ -131,7 +131,7 @@ class TagIf extends Decision
 							'right' => $right
 						));
 					} else {
-						throw new LiquidException("Syntax Error in tag 'if' - Valid syntax: if [condition]");
+						new LiquidException("Syntax Error in tag 'if' - Valid syntax: if [condition]");
 					}
 				}
 

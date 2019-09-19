@@ -89,7 +89,7 @@ class TagSection extends AbstractTag
 
 			$this->extractAttributes($markup);
 		} else {
-            throw new LiquidException("Error in tag 'section' - Valid syntax: section '[template]' (with|for) [object|collection]", 7);
+            new LiquidException("Error in tag 'section' - Valid syntax: section '[template]' (with|for) [object|collection]", 7);
 		}
 
 		parent::__construct($markup, $tokens, $fileSystem);
@@ -104,7 +104,7 @@ class TagSection extends AbstractTag
 	 */
 	public function parse(array &$tokens) {
 		if ($this->fileSystem === null) {
-			throw new LiquidException("No file system");
+			new LiquidException("No file system");
 		}
 
 		// read the source of the template and create a new sub document

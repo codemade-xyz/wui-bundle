@@ -75,7 +75,7 @@ class TagAssign extends AbstractTag
 			$this->to = $syntaxRegexp->matches[1];
 			$this->from = $syntaxRegexp->matches[2];
 		} else {
-			throw new LiquidException("Syntax Error in 'assign' - Valid syntax: assign [var] = [source]");
+			new LiquidException("Syntax Error in 'assign' - Valid syntax: assign [var] = [source]");
 		}
 	}
 
