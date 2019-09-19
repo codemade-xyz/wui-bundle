@@ -41,7 +41,7 @@ use CodeMade\WuiBundle\Liquid\Template;
  */
 class TagSchema extends AbstractBlock
 {
-    public function render(Context &$context)
+    public function render(Context $context)
     {
         liquid::setSchema(parent::render($context));
         return '';
