@@ -78,7 +78,7 @@ class AbstractBlock extends AbstractTag
 						$this->unknownTag($tagRegexp->matches[1], $tagRegexp->matches[2], $tokens);
 					}
 				} else {
-					throw new LiquidException("Tag $token was not properly terminated"); // harry
+					throw new LiquidException("Tag $token was not properly terminated", 7); // harry
 				}
 
 			} elseif ($variableStartRegexp->match($token)) {
