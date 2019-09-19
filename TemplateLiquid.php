@@ -108,48 +108,18 @@ class TemplateLiquid
 
 
     /**
+     * @param Template $liquid
      * @param string $html
-     * @param string $view
      * @param array $parameters
      * @return string
      * @throws \CodeMade\WuiBundle\Liquid\LiquidException
      */
-    public function renderContent($html, string $view, array $parameters)
+    public function renderContent($liquid, $html, array $parameters)
     {
         if ($this->kernel->isDebug())
         {
             $panel = new Panel($this->kernel);
         }
-
-        list($template_file, $template_path, $template_name, $view) = $this->getTemplateFile($view);
-
-        Liquid::set('INCLUDE_SUFFIX', $this->settings['include_suffix']);
-        Liquid::set('INCLUDE_PREFIX', $this->settings['include_prefix']);
-        Liquid::setTemplate($template_name);
-        Liquid::setView($view);
-        Liquid::$project_dir = $this->kernel->getProjectDir();
-        Liquid::$project_env = $this->kernel->getEnvironment();
-
-        $request = $this->kernel->getContainer()->get('request_stack')->getCurrentRequest();
-
-
-        $this->setSettingFromRequest($request);
-
-        $cache = $this->getCacheSetting();
-
-        $liquid = new Template($template_path.'/', $cache);
-
-
-        if (!empty($this->settings['tags'])) {
-            foreach ($this->settings['tags'] as $key => $item) {
-                $liquid->registerTag($key, $item);
-            }
-        }
-
-        if (!empty($this->settings['filter'])) {
-            $liquid->registerFilter(new $this->settings['filter']);
-        }
-
 
         $liquid->parse($html);
         $content = $liquid->render($parameters);
@@ -175,6 +145,47 @@ class TemplateLiquid
         }
 
         return $content;
+
+    }
+
+
+    /**
+     * @param string $template_path
+     * @param string $template_name
+     * @param array $parameters
+     * @return string
+     * @throws \CodeMade\WuiBundle\Liquid\LiquidException
+     */
+    public function getLiquid(string $template_path, string $template_name, array $parameters)
+    {
+        Liquid::set('INCLUDE_SUFFIX', $this->settings['include_suffix']);
+        Liquid::set('INCLUDE_PREFIX', $this->settings['include_prefix']);
+        Liquid::setTemplate($template_name);
+        Liquid::$project_dir = $this->kernel->getProjectDir();
+        Liquid::$project_env = false;
+
+        $request = $this->kernel->getContainer()->get('request_stack')->getCurrentRequest();
+
+
+        $this->setSettingFromRequest($request);
+
+        $cache = $this->getCacheSetting();
+
+        $liquid = new Template($template_path.'/', $cache);
+
+
+        if (!empty($this->settings['tags'])) {
+            foreach ($this->settings['tags'] as $key => $item) {
+                $liquid->registerTag($key, $item);
+            }
+        }
+
+        if (!empty($this->settings['filter'])) {
+            $liquid->registerFilter(new $this->settings['filter']);
+        }
+
+
+        return $liquid;
 
     }
 
