@@ -43,6 +43,9 @@ class TagSchema extends AbstractBlock
 {
     public function render(Context $context)
     {
+        echo '<pre>';
+        print_r($context);
+        echo '</pre>';
         liquid::setSchema(parent::render($context));
         return '';
     }
