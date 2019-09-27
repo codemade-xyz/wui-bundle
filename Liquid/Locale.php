@@ -34,10 +34,9 @@ class Locale
 
             if (!empty($dir_module) && $dir_module != '') {
                 $path_controller = mb_strtolower($dir_module);
-                $file_locale = $this->path . '/locales/' . $dir_module . '/' . Liquid::getLocale() . '.json';
+                $file_locale = $this->path . '/locales/' . $path_controller . '/' . Liquid::getLocale() . '.json';
                 $file_locale = preg_replace('|([/]+)|s', '/', $file_locale);
 
-                print_r($file_locale);
 
                 if (is_file($file_locale)) {
                     $locales_module = @json_decode(@file_get_contents($file_locale), true);
