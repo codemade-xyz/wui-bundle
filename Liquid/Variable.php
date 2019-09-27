@@ -119,6 +119,14 @@ class Variable
 	public function render(Context $context) {
 		$output = $context->get($this->name);
 
+		if (is_array($output) && (isset($output['ru']) || isset($output['en']))) {
+            if (liquid::getLocale() != '' && isset($output[liquid::getLocale()])) {
+                $output = $output[liquid::getLocale()];
+            } else {
+                $output = liquid::getLocale();
+            }
+        }
+
 		foreach ($this->filters as $filter) {
 			list($filtername, $filterArgKeys) = $filter;
 

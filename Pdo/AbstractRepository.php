@@ -38,6 +38,14 @@ class AbstractRepository
         $this->qb = new QueryBuilder($this->db);
     }
 
+    public function select($field = '*', $condition = [], $order = [])
+    {
+        if (!empty($order)) {
+            $condition['ORDER'] = $order;
+        }
+        return $this->db->select($this->tableName, $field, $condition);
+    }
+
     public function find($id)
     {
         return $this->db->select($this->tableName,'*',[$this->tableMap['id'] => $id]);

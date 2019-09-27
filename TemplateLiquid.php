@@ -152,15 +152,13 @@ class TemplateLiquid
     /**
      * @param string $template_path
      * @param string $template_name
-     * @param array $parameters
      * @return string
      * @throws \CodeMade\WuiBundle\Liquid\LiquidException
      */
-    public function getLiquid(string $template_path, string $template_name, array $parameters)
+    public function getLiquid(string $template_path, string $template_name)
     {
         Liquid::set('INCLUDE_SUFFIX', $this->settings['include_suffix']);
         Liquid::set('INCLUDE_PREFIX', $this->settings['include_prefix']);
-        Liquid::setTemplate($template_name);
         Liquid::$project_dir = $this->kernel->getProjectDir();
         Liquid::$project_env = false;
 
