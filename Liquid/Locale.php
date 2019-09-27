@@ -33,7 +33,7 @@ class Locale
 
 
             if (!empty($dir_module) && $dir_module != '') {
-                $path_controller = ucfirst(mb_strtolower($dir_module));
+                $path_controller = mb_strtolower($dir_module);
                 $file_locale = $this->path . '/locales/' . $dir_module . '/' . Liquid::getLocale() . '.json';
                 $file_locale = preg_replace('|([/]+)|s', '/', $file_locale);
 
