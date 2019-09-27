@@ -37,6 +37,8 @@ class Locale
                 $file_locale = $this->path . '/locales/' . $dir_module . '/' . Liquid::getLocale() . '.json';
                 $file_locale = preg_replace('|([/]+)|s', '/', $file_locale);
 
+                print_r($file_locale);
+
                 if (is_file($file_locale)) {
                     $locales_module = @json_decode(@file_get_contents($file_locale), true);
                     if (is_array($locales_module)) {
