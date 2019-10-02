@@ -115,6 +115,14 @@ class PdoQuery
 
     }
 
+    public function distinct()
+    {
+        $result = $this->connection->distinct();
+
+        return $result;
+
+    }
+
     public function delete($table, $where = null)
     {
         $start = microtime(true);
