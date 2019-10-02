@@ -117,9 +117,9 @@ class PdoQuery
 
     public function distinct()
     {
-        $result = $this->connection->distinct();
+        $this->connection->distinct();
 
-        return $result;
+        return $this;
 
     }
 
