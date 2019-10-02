@@ -32,6 +32,8 @@ class Connection
 
     protected $debug_mode = false;
 
+    protected $distinct_mode = false;
+
     protected $guid = 0;
 
     public function __construct($settings)
@@ -874,7 +876,15 @@ class Connection
             $column = $this->columnPush($columns, $map, true, $is_join);
         }
 
-        return 'SELECT ' . $column . ' FROM ' . $table_query . $this->whereClause($where, $map);
+        if($this->distinct_mode)
+        {
+            $distinct = 'DISTINCT ';
+            $this->distinct_mode = false;
+        } else {
+            $distinct = '';
+        }
+
+        return 'SELECT ' . $distinct . $column . ' FROM ' . $table_query . $this->whereClause($where, $map);
     }
 
     protected function buildJoin($table, $join)
@@ -1150,6 +1160,13 @@ class Connection
         $tableName = $this->prefix . $table;
 
         return $this->exec("DROP TABLE IF EXISTS $tableName");
+    }
+
+    public function distinct()
+    {
+        $this->distinct_mode = true;
+
+        return $this;
     }
 
     public function select($table, $join, $columns = null, $where = null)
