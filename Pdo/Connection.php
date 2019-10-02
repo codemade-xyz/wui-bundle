@@ -867,8 +867,15 @@ class Connection
                     $columns = '*';
                     $where = $join;
                 }
-
-                $column = $column_fn . '(' . $this->columnPush($columns, $map, true) . ')';
+                $distinct = '';
+                if ($column_fn == 'COUNT') {
+                    if($this->distinct_mode)
+                    {
+                        $distinct = 'DISTINCT ';
+                        $this->distinct_mode = false;
+                    }
+                }
+                $column = $column_fn . '(' . $distinct . $this->columnPush($columns, $map, true) . ')';
             }
         }
         else
