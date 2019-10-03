@@ -57,6 +57,7 @@ class TemplateLiquid
         Liquid::setView($view);
         Liquid::$project_dir = $this->kernel->getProjectDir();
         Liquid::$project_env = $this->kernel->getEnvironment();
+        Liquid::setDB($this->kernel->getContainer()->get('database'));
 
         $request = $this->kernel->getContainer()->get('request_stack')->getCurrentRequest();
 
