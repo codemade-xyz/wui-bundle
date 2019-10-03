@@ -11,6 +11,7 @@
 
 namespace CodeMade\WuiBundle\Liquid;
 
+use CodeMade\WuiBundle\Database;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
@@ -104,6 +105,11 @@ class Liquid
 
     // parameter from controller
     protected static $parameter;
+
+    /**
+     * @var Database
+     */
+    protected static $database;
 
     /**
      * @var PropertyAccessor
@@ -290,6 +296,14 @@ class Liquid
     }
 
 
+    public static function getDB()
+    {
+        return self::$database;
+    }
 
+    public static function setDB($database)
+    {
+        return self::$database = $database;
+    }
 
 }
