@@ -28,7 +28,7 @@ class Locale
         }
 
 
-        if (Liquid::getTemplate() == 'Admin') {
+        if (Liquid::getTemplate() == 'Admin' || (isset($_ENV['APP_COMPANY']) && $_ENV['APP_COMPANY'] == Liquid::getTemplate())) {
             $dir_module = dirname(Liquid::getView() . '.' . Liquid::get('INCLUDE_SUFFIX'));
 
 
