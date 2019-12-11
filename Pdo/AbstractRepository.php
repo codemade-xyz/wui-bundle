@@ -101,7 +101,7 @@ class AbstractRepository
 
     public function sum($join, $column = null, $where = null)
     {
-        return $this->db->count($this->tableName, $join, $column = null, $where = null);
+        return $this->db->sum($this->tableName, $join, $column = null, $where = null);
     }
 
     protected function setTableMaps($map)

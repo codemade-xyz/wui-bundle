@@ -84,6 +84,19 @@ class PdoQuery
 
     }
 
+    public function sum($table, $join = null, $columns = null, $where = null)
+    {
+        $start = microtime(true);
+        $result = $this->connection->sum($table, $join, $columns, $where);
+        if ($this->debug)
+        {
+            $this->addLog($start);
+        }
+
+        return $result;
+
+    }
+
     public function insert($table, $data)
     {
         $start = microtime(true);
