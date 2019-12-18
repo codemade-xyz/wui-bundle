@@ -78,7 +78,7 @@ class TagInclude extends AbstractTag
 		$regex = new Regexp('/("[^"]+"|\'[^\']+\')(\s+(with|for)\s+(' . Liquid::get('QUOTED_FRAGMENT') . '+))?/');
 
 		if ($regex->match($markup)) {
-			$this->templateName = 'templates/'.substr($regex->matches[1], 1, strlen($regex->matches[1]) - 2);
+			$this->templateName = 'snippets/'.substr($regex->matches[1], 1, strlen($regex->matches[1]) - 2);
 
 			if (isset($regex->matches[1])) {
 				$this->collection = (isset($regex->matches[3])) ? ($regex->matches[3] == "for") : null;
