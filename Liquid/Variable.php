@@ -118,12 +118,7 @@ class Variable
 	 */
 	public function render(Context $context) {
 
-        $output = false;
-        if (class_exists('App\Utils\Liquid\TemplateVars')) {
-            $output = call_user_func(array('App\Utils\Liquid\TemplateVars', 'get'), $this->name);
-        }
-
-		$output =  !$output ? $context->get($this->name) : $output;
+		$output =  $context->get($this->name);
 
 		if (is_array($output) && (isset($output['ru']) || isset($output['en']))) {
             if (liquid::getLocale() != '' && isset($output[liquid::getLocale()])) {
