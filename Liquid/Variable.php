@@ -119,7 +119,7 @@ class Variable
 	public function render(Context $context) {
 
         $output = false;
-        if (in_array($this->name, ['blogs'])) {
+        if (class_exists('App\Utils\Liquid\TemplateVars')) {
             $output = App\Utils\Liquid\TemplateVars::get($this->name);
         }
 
