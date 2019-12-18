@@ -117,7 +117,13 @@ class Variable
 	 * @return mixed|string
 	 */
 	public function render(Context $context) {
-		$output = $context->get($this->name);
+
+        $output = false;
+        if (in_array($this->name, ['blogs'])) {
+            $output = App\Utils\Liquid\TemplateVars::get($this->name);
+        }
+
+		$output =  !$output ? $context->get($this->name) : $output;
 
 		if (is_array($output) && (isset($output['ru']) || isset($output['en']))) {
             if (liquid::getLocale() != '' && isset($output[liquid::getLocale()])) {
