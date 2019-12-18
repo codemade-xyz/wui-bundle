@@ -120,7 +120,7 @@ class Variable
 
         $output = false;
         if (class_exists('App\Utils\Liquid\TemplateVars')) {
-            $output = App\Utils\Liquid\TemplateVars::get($this->name);
+            $output = call_user_func(array('App\Utils\Liquid\TemplateVars', 'get'), $this->name);
         }
 
 		$output =  !$output ? $context->get($this->name) : $output;
