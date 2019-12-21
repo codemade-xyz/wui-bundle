@@ -107,6 +107,7 @@ class TagPaginate extends AbstractBlock
     public function render(Context $context) {
 
         $this->currentPage = ( is_numeric($context->get('page')) ) ? $context->get('page') : 1;
+        $this->numberItems = ( is_numeric($this->numberItems) ) ? $this->numberItems : 10;
         $this->currentOffset = ($this->currentPage - 1) * $this->numberItems;
     	$this->collection = $context->get($this->collectionName);
 		if ($this->collection instanceof \Traversable) {
